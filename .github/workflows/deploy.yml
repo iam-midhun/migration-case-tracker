@@ -37,6 +37,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Verify Supabase environment variables
+        run: |
+          test -n "$VITE_SUPABASE_URL" || (echo "VITE_SUPABASE_URL is missing" && exit 1)
+          test -n "$VITE_SUPABASE_ANON_KEY" || (echo "VITE_SUPABASE_ANON_KEY is missing" && exit 1)
+
+      - name: Verify Supabase environment variables
+        run: |
+          test -n "$VITE_SUPABASE_URL" || (echo "Supabase URL is missing" && exit 1)
+          test -n "$VITE_SUPABASE_ANON_KEY" || (echo "Supabase key is missing" && exit 1)
+          echo "Supabase environment variables are available."
+
       - name: Build application
         run: npm run build
 
